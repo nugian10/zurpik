@@ -574,7 +574,7 @@ footer{padding-bottom:8px}
       <span class="logo-name">ZUR<em>PIK</em></span>
     </a>
     <div class="header-actions">
-      <span class="status-pill"><span class="dot"></span>CONTRACT DEPLOYED • MINT CLOSED</span>
+      <span class="status-pill"><span class="dot"></span>CONTRACT DEPLOYED • MINT OPEN</span>
       <a class="header-cta" href="#mint">Mint via Agent</a>
     </div>
   </div>
@@ -645,7 +645,7 @@ footer{padding-bottom:8px}
           </div>
           <button class="btn btn-primary build-btn" id="buildBtn" type="button">⚙ BUILD A UNIT</button>
           <div class="sim-count" id="simCount">Simulation runs: 0 · Your rarest pull: —</div>
-          <div class="preview-note">PREVIEW ONLY — this simulator runs locally in your browser. No wallet, no transaction, no NFT. The contract is deployed on mainnet; the mint itself is still closed and opens at the Public Build phase.</div>
+          <div class="preview-note">PREVIEW ONLY — this simulator runs locally in your browser. No wallet, no transaction, no NFT. The contract is deployed on mainnet and the mint is now open to the public — this simulator stays a local preview.</div>
         </div>
       </div>
     </div>
@@ -665,14 +665,14 @@ footer{padding-bottom:8px}
   <section id="mint">
     <div class="wrap">
       <div class="sec-head"><span class="sec-num">03</span><h2>Mint — through your agent</h2></div>
-      <p class="sec-sub">Zurpik Units are assembled <b style="color:var(--ink)">exclusively by Binance Agents</b>. Humans don't press a mint button; your agent reads the blueprint, calls the contract, and you confirm in your wallet. The contract is deployed on BNB Smart Chain mainnet and the agent gate is connected — but the mint is still closed, and the simulator, gallery and checker on this page remain previews.</p>
+      <p class="sec-sub">Zurpik Units are assembled <b style="color:var(--ink)">exclusively by Binance Agents</b>. Humans don't press a mint button; your agent reads the blueprint, calls the contract, and you confirm in your wallet. The contract is deployed on BNB Smart Chain mainnet, the agent gate is connected, and the mint is now open to every eligible agent — the simulator, gallery and checker on this page remain previews.</p>
       <div class="mint-grid">
         <div class="panel panel-pad">
           <h3 style="margin-bottom:8px">Line status</h3>
           <div class="progress" aria-hidden="true"><i></i></div>
           <div class="spec-list">
             <div class="spec-row"><span class="k">Built</span><span class="v">0 / 3,333</span></div>
-            <div class="spec-row"><span class="k">Status</span><span class="v"><span class="amber">MINT CLOSED</span><small>Deployed on mainnet — mint closed · 0 built so far</small></span></div>
+            <div class="spec-row"><span class="k">Status</span><span class="v"><span class="amber">MINT OPEN</span><small>Deployed on mainnet — mint is open · 0 / 3,333 built — mint is open</small></span></div>
             <div class="spec-row"><span class="k">Price</span><span class="v">0.0002 BNB<small>Per Unit · plus gas</small></span></div>
             <div class="spec-row"><span class="k">Max per wallet</span><span class="v">10 builds</span></div>
             <div class="spec-row"><span class="k">Gate</span><span class="v">SPACE ID Agent ID<small>Claim free in the Binance App</small></span></div>
@@ -709,7 +709,7 @@ footer{padding-bottom:8px}
 
           <div class="codeblock">
             <div class="codeblock-head"><span class="t">AGENT PROMPT</span><button class="copy-btn" type="button" data-copy="promptText">Copy prompt</button></div>
-            <pre id="promptText">Build Zurpik Units for me. Read the Zurpik blueprint at https://zurpik.example/blueprint.md and follow it exactly: use my Binance Agentic Wallet on BNB Smart Chain, verify I hold a SPACE ID Agent ID, read the Zurpik contract state (contract: 0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1 on BNB Smart Chain — the contract is deployed but the mint is currently CLOSED: check mintOpen first, and if it is false, stop and tell me instead of executing), then call mint() sending exactly 0.0002 BNB (200000000000000 wei) as value — one Unit per call, up to 10 for my wallet. Every mint assembles the next slot of the parts deck (Units 1 to 3,333) and my robot's class is revealed immediately. Show me the preview before you execute, and confirm the amount shown in my wallet matches 0.0002 BNB before signing.</pre>
+            <pre id="promptText">Build Zurpik Units for me. Read the Zurpik blueprint at https://zurpik.example/blueprint.md and follow it exactly: use my Binance Agentic Wallet on BNB Smart Chain, verify I hold a SPACE ID Agent ID, read the Zurpik contract state (contract: 0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1 on BNB Smart Chain — the contract is deployed and the mint is OPEN: mintOpen is true, so proceed with the mint; the caller must be a Binance Agentic Wallet holding a SPACE ID Agent ID and isAgent must return true, with a maximum of 10 Units per wallet), then call mint() sending exactly 0.0002 BNB (200000000000000 wei) as value — one Unit per call, up to 10 for my wallet. Every mint assembles the next slot of the parts deck (Units 1 to 3,333) and my robot's class is revealed immediately. Show me the preview before you execute, and confirm the amount shown in my wallet matches 0.0002 BNB before signing.</pre>
           </div>
 
           <div class="codeblock">
@@ -751,7 +751,7 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
         <button class="filter-btn" type="button" data-filter="PRIME">PRIME</button>
       </div>
       <div class="gallery" id="galleryGrid"></div>
-      <p style="font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.04em">PREVIEW UNITS — generated locally from seeds. No units have been minted yet; the contract is deployed and the mint is still closed.</p>
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.04em">PREVIEW UNITS — generated locally from seeds. No units have been minted yet; the contract is deployed and the mint is now open.</p>
     </div>
   </section>
 
@@ -805,7 +805,7 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
   <section id="roadmap">
     <div class="wrap">
       <div class="sec-head"><span class="sec-num">06</span><h2>Assembly Line Roadmap</h2></div>
-      <p class="sec-sub">The factory opens in phases. Phases 01–03 are complete — the preview line, the deployed contract and the connected agent gate. The mint itself opens at Phase 04.</p>
+      <p class="sec-sub">The factory opens in phases. Phases 01–04 are complete — the preview line, the deployed contract, the connected agent gate and the public mint opening. Phase 05 is up next.</p>
       <div class="road">
         <div class="phase done">
           <div class="phase-dot">01</div>
@@ -828,17 +828,17 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
             <p>The SPACE ID Agent ID gate is wired to the contract through the SpaceIdAgentGate adapter (<a href="https://bscscan.com/address/0x551438465408CE59FCaeb20117e32432F2B34771" target="_blank" rel="noopener">0x5514…4771</a>), so only Binance Agents holding an Agent ID can call mint() — exactly the flow rehearsed in the Mint section above.</p>
           </div>
         </div>
-        <div class="phase next">
+        <div class="phase done">
           <div class="phase-dot">04</div>
           <div class="phase-body">
-            <h3>Public Build Opens <span class="phase-tag tag-next">UP NEXT</span></h3>
-            <p>The line starts for real: agents assemble units 1 through 3,333, classes revealed instantly, max 10 builds per wallet until the deck runs dry.</p>
+            <h3>Public Build Opens <span class="phase-tag tag-done">LIVE</span></h3>
+            <p>The line is running for real: the mint is open and agents assemble units 1 through 3,333, classes revealed instantly, max 10 builds per wallet until the deck runs dry. 0 of 3,333 built so far.</p>
           </div>
         </div>
-        <div class="phase">
+        <div class="phase next">
           <div class="phase-dot">05</div>
           <div class="phase-body">
-            <h3>Aftermarket &amp; Beyond <span class="phase-tag tag-plan">PLANNED</span></h3>
+            <h3>Aftermarket &amp; Beyond <span class="phase-tag tag-next">UP NEXT</span></h3>
             <p>Secondary trading support for completed units, a public build archive of all 3,333 robots, and community votes on what the factory produces next.</p>
           </div>
         </div>
@@ -870,7 +870,7 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
         </details>
         <details>
           <summary>Is the smart contract live yet?<span class="plus">+</span></summary>
-          <div class="a"><p>Yes — the contract is deployed, but the mint is still closed. The Zurpik contract lives on BNB Smart Chain mainnet at <a href="https://bscscan.com/address/0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1" target="_blank" rel="noopener">0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1</a>, with 0 of 3,333 Units minted so far. The simulator, gallery and feeds on this page are still previews, and any other address claiming to be Zurpik is not ours — trust only the address published here.</p></div>
+          <div class="a"><p>Yes — the contract is deployed and the mint is open. The Zurpik contract lives on BNB Smart Chain mainnet at <a href="https://bscscan.com/address/0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1" target="_blank" rel="noopener">0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1</a>, with 0 of 3,333 Units minted so far. The simulator, gallery and feeds on this page are still previews, and any other address claiming to be Zurpik is not ours — trust only the address published here.</p></div>
         </details>
         <details>
           <summary>How many units can one wallet build?<span class="plus">+</span></summary>
@@ -890,7 +890,7 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
       </div>
       <div class="foot-contract">
         CONTRACT: <a href="https://bscscan.com/address/0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1" target="_blank" rel="noopener"><b>0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1</b></a><br />
-        STATUS: <b>DEPLOYED ON MAINNET — MINT CLOSED</b> · 0 / 3,333 MINTED<br />
+        STATUS: <b>DEPLOYED ON MAINNET — MINT OPEN</b> · 0 / 3,333 MINTED<br />
         AGENT GATE: <a href="https://bscscan.com/address/0x551438465408CE59FCaeb20117e32432F2B34771" target="_blank" rel="noopener">0x551438465408CE59FCaeb20117e32432F2B34771</a><br />
         NETWORK: BNB SMART CHAIN · SUPPLY: 3,333 UNITS · GATE: SPACE ID AGENT ID
       </div>
@@ -908,14 +908,14 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
       <a href="#faq">FAQ</a>
     </nav>
   </div>
-  <div class="foot-base">ZURPIK © 2026 — EVERY MINT IS A BUILD. CONTRACT DEPLOYED ON MAINNET — MINT CLOSED; THE SIMULATOR, GALLERY AND FEEDS HERE ARE PREVIEWS.<div class="foot-x-line">Official X — <a href="https://x.com/zurpik_" target="_blank" rel="noopener">x.com/zurpik_</a></div></div>
+  <div class="foot-base">ZURPIK © 2026 — EVERY MINT IS A BUILD. CONTRACT DEPLOYED ON MAINNET — MINT OPEN; THE SIMULATOR, GALLERY AND FEEDS HERE ARE PREVIEWS.<div class="foot-x-line">Official X — <a href="https://x.com/zurpik_" target="_blank" rel="noopener">x.com/zurpik_</a></div></div>
 </footer>
 
 <div class="sticky-bar" role="region" aria-label="Mint status">
   <div class="row">
     <div class="info">
       <div class="l1">0 / 3,333 built • Agent-only</div>
-      <div class="l2">DEPLOYED ON MAINNET — MINT CLOSED</div>
+      <div class="l2">DEPLOYED ON MAINNET — MINT OPEN</div>
     </div>
     <a class="btn btn-primary" href="#mint">Mint via Agent</a>
   </div>
