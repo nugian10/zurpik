@@ -602,7 +602,7 @@ footer{padding-bottom:8px}
       <div>
         <span class="hero-badge"><span class="dot"></span>ASSEMBLY LINE · BNB CHAIN · AGENT-ONLY</span>
         <h1>Every mint<br />is a <span class="grad">build.</span></h1>
-        <p class="lede"><b>3,333 Zurpik Units</b> wait in the parts deck on BNB Smart Chain. There is no mint button here — your Binance Agent reads the blueprint, pulls the next parts off the line, and assembles <b>one random robot</b>. Its class is revealed the second the build confirms.</p>
+        <p class="lede"><b>3,333 Zurpik Units</b> wait in the parts deck on BNB Smart Chain. There is no mint button here — your Binance Agent takes the build prompt below, pulls the next parts off the line, and assembles <b>one random robot</b>. Its class is revealed the second the build confirms.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#simulator">Try the Assembly Simulator</a>
           <a class="btn btn-ghost" href="#mint">How minting works</a>
@@ -665,7 +665,7 @@ footer{padding-bottom:8px}
   <section id="mint">
     <div class="wrap">
       <div class="sec-head"><span class="sec-num">03</span><h2>Mint — through your agent</h2></div>
-      <p class="sec-sub">Zurpik Units are assembled <b style="color:var(--ink)">exclusively by Binance Agents</b>. Humans don't press a mint button; your agent reads the blueprint, calls the contract, and you confirm in your wallet. The contract is deployed on BNB Smart Chain mainnet, the agent gate is connected, and the mint is now open to every eligible agent — the simulator, gallery and checker on this page remain previews.</p>
+      <p class="sec-sub">Zurpik Units are assembled <b style="color:var(--ink)">exclusively by Binance Agents</b>. Humans don't press a mint button; your agent follows the build prompt below, calls the contract, and you confirm in your wallet. The contract is deployed on BNB Smart Chain mainnet, the agent gate is connected, and the mint is now open to every eligible agent — the simulator, gallery and checker on this page remain previews.</p>
       <div class="mint-grid">
         <div class="panel panel-pad">
           <h3 style="margin-bottom:8px">Line status</h3>
@@ -709,7 +709,7 @@ footer{padding-bottom:8px}
 
           <div class="codeblock">
             <div class="codeblock-head"><span class="t">AGENT PROMPT</span><button class="copy-btn" type="button" data-copy="promptText">Copy prompt</button></div>
-            <pre id="promptText">Build Zurpik Units for me. Read the Zurpik blueprint at https://zurpik.example/blueprint.md and follow it exactly: use my Binance Agentic Wallet on BNB Smart Chain, verify I hold a SPACE ID Agent ID, read the Zurpik contract state (contract: 0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1 on BNB Smart Chain — the contract is deployed and the mint is OPEN: mintOpen is true, so proceed with the mint; the caller must be a Binance Agentic Wallet holding a SPACE ID Agent ID and isAgent must return true, with a maximum of 10 Units per wallet), then call mint() sending exactly 0.0002 BNB (200000000000000 wei) as value — one Unit per call, up to 10 for my wallet. Every mint assembles the next slot of the parts deck (Units 1 to 3,333) and my robot's class is revealed immediately. Show me the preview before you execute, and confirm the amount shown in my wallet matches 0.0002 BNB before signing.</pre>
+            <pre id="promptText">Build Zurpik Units for me. Use my Binance Agentic Wallet on BNB Smart Chain, verify I hold a SPACE ID Agent ID, and read the Zurpik contract state first (contract: 0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1 on BNB Smart Chain — the contract is deployed and the mint is OPEN: mintOpen is true, so proceed with the mint; the caller must be a Binance Agentic Wallet holding a SPACE ID Agent ID and isAgent must return true, with a maximum of 10 Units per wallet). Then call mint() sending exactly 0.0002 BNB (200000000000000 wei) as value — one Unit per call, up to 10 for my wallet. Every mint assembles the next slot of the parts deck (Units 1 to 3,333) and my robot's class is revealed immediately. Show me the preview before you execute, and confirm the amount shown in my wallet matches 0.0002 BNB before signing.</pre>
           </div>
 
           <div class="codeblock">
@@ -854,7 +854,7 @@ curl -fsSL https://github.com/binance/binance-skills-hub/raw/main/skills/binance
       <div class="faq">
         <details>
           <summary>Why is there no mint button?<span class="plus">+</span></summary>
-          <div class="a"><p>By design. Zurpik is agent-only: your Binance Agent reads the blueprint, verifies your SPACE ID Agent ID, and calls mint() on the contract itself. You stay in control — the agent shows a preview and you confirm every build in your own wallet.</p></div>
+          <div class="a"><p>By design. Zurpik is agent-only: your Binance Agent follows the build prompt on this page, verifies your SPACE ID Agent ID, and calls mint() on the contract itself. You stay in control — the agent shows a preview and you confirm every build in your own wallet.</p></div>
         </details>
         <details>
           <summary>What decides which robot I get?<span class="plus">+</span></summary>
