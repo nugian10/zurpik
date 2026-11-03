@@ -125,10 +125,12 @@ h2{font-family:var(--font-head);font-weight:800;font-size:clamp(23px,6.2vw,38px)
 h3{font-family:var(--font-head);font-size:16px;letter-spacing:.03em;margin:0}
 
 /* ---------- ticker ---------- */
-.ticker{border-bottom:1px solid var(--line);background:rgba(11,11,34,.7);overflow:hidden;overflow:clip;position:relative;max-width:100vw}
+.ticker{border-bottom:1px solid var(--line);background:rgba(11,11,34,.7);overflow:hidden;overflow:clip;position:relative;max-width:100vw;contain:paint}
 .ticker-tag{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;align-items:center;gap:7px;
-  padding:0 12px;background:linear-gradient(90deg,#0b0b22 78%,transparent);
+  padding:0 12px;background:#0b0b22;
   font-family:var(--font-mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--cyan)}
+.ticker-tag::after{content:"";position:absolute;top:0;bottom:0;right:-30px;width:30px;pointer-events:none;
+  background:linear-gradient(90deg,#0b0b22,rgba(11,11,34,0))}
 .ticker-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green);animation:pulse 1.4s infinite}
 .ticker-track{display:flex;gap:0;width:max-content;animation:tick 38s linear infinite;padding:9px 0}
 .ticker:hover .ticker-track{animation-play-state:paused}
@@ -138,7 +140,7 @@ h3{font-family:var(--font-head);font-size:16px;letter-spacing:.03em;margin:0}
 .tick-item .cls{font-weight:700;letter-spacing:.06em}
 
 /* ---------- hero ---------- */
-.hero{padding:24px 0 8px}
+.hero{padding-top:24px;padding-bottom:8px}
 .hero-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:center}
 .hero-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10.5px;
   font-weight:700;letter-spacing:.08em;color:var(--cyan-hi);border:1px solid var(--line-strong);
@@ -167,7 +169,7 @@ h1 .grad{background:linear-gradient(92deg,var(--cyan-hi) 0%,var(--violet) 52%,va
   .stat .v{font-size:clamp(17px,3vw,23px)}
 }
 @media(min-width:861px){
-  .hero{padding:44px 0 10px}
+  .hero{padding-top:44px;padding-bottom:10px}
   .hero-grid{grid-template-columns:1.05fr .95fr;gap:34px}
   .hero-badge{font-size:11.5px;letter-spacing:.12em;padding:7px 13px;margin-bottom:20px}
   h1{margin-bottom:18px}
@@ -516,6 +518,41 @@ footer{padding-bottom:8px}
   .stage-meta{padding:13px 16px 16px}
   .stage-floor{margin:0 34px 0}
 }
+/* ---------- small-screen hardening (≤860px) ---------- */
+@media(max-width:860px){
+  /* header is 52px + 56px nav strip = 108px; keep section titles clear of it */
+  section{scroll-margin-top:124px}
+  /* sticky bar is 68px + safe-area; reserve room so it never covers the footer */
+  body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .build-btn{bottom:calc(100px + env(safe-area-inset-bottom))}
+  .toast{bottom:calc(104px + env(safe-area-inset-bottom))}
+  .sticky-bar .info .l1{overflow:hidden;text-overflow:ellipsis}
+  /* code / agent-prompt blocks scroll sideways inside themselves; the Copy
+     button lives in the block header and stays put while the code scrolls */
+  .codeblock pre{white-space:pre;word-break:normal;overflow-wrap:normal;overscroll-behavior-x:contain}
+  /* contract + adapter rows stack full-width so the 42-char addresses wrap
+     in a wide, readable column instead of a squeezed right-hand cell */
+  .spec-row.addr-row{flex-direction:column;gap:7px}
+  .spec-row.addr-row .v{text-align:left;width:100%}
+  .spec-row.addr-row .v .addr{font-size:12.5px;line-height:1.7}
+  .spec-row.addr-row .v small{font-size:11.5px;line-height:1.6}
+  /* copy controls become real 44px touch targets */
+  .addr-copy{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+    padding:10px 16px;margin-top:8px;border:1px solid var(--line-strong);border-radius:9px;
+    background:rgba(103,232,249,.08);color:var(--ink);font-family:var(--font-mono);
+    font-size:12px;font-weight:700;text-decoration:none}
+  .addr-copy:active{background:rgba(103,232,249,.18)}
+  /* inline text links get a taller hit area without moving any layout
+     (vertical padding paints the target; negative margins cancel the rest) */
+  .spec-row .v small a,.phase-body p a,.faq .a a{padding:10px 3px;margin:-10px -3px}
+  .foot-contract a{padding:11px 4px;margin:-11px -4px}
+  .foot-x-line a{display:inline-flex;align-items:center;min-height:44px;padding:4px 2px}
+  /* single-column grids must never let an item's min-content widen the
+     track past the viewport (long addresses, code lines, pill buttons) */
+  .mint-grid,.sim-grid,.hero-grid{grid-template-columns:minmax(0,1fr)}
+  .mint-grid>*,.sim-grid>*,.hero-grid>*,.foot-in>*{min-width:0}
+  .spec-row .v small{overflow-wrap:anywhere}
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important}
@@ -639,10 +676,10 @@ footer{padding-bottom:8px}
             <div class="spec-row"><span class="k">Price</span><span class="v">0.0002 BNB<small>Per Unit · plus gas</small></span></div>
             <div class="spec-row"><span class="k">Max per wallet</span><span class="v">10 builds</span></div>
             <div class="spec-row"><span class="k">Gate</span><span class="v">SPACE ID Agent ID<small>Claim free in the Binance App</small></span></div>
-            <div class="spec-row"><span class="k">Gate adapter</span><span class="v"><span class="addr">0x551438465408CE59FCaeb20117e32432F2B34771</span><small>SpaceIdAgentGate · <a href="https://bscscan.com/address/0x551438465408CE59FCaeb20117e32432F2B34771" target="_blank" rel="noopener">View on BscScan ↗</a><br />Reads the SPACE ID Agent ID registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</small></span></div>
+            <div class="spec-row addr-row"><span class="k">Gate adapter</span><span class="v"><span class="addr" id="adapterAddr">0x551438465408CE59FCaeb20117e32432F2B34771</span><small>SpaceIdAgentGate · <a href="https://bscscan.com/address/0x551438465408CE59FCaeb20117e32432F2B34771" target="_blank" rel="noopener">View on BscScan ↗</a> · <button class="addr-copy" type="button" data-copy="adapterAddr">Copy address</button><br />Reads the SPACE ID Agent ID registry 0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</small></span></div>
             <div class="spec-row"><span class="k">Reveal</span><span class="v">Instant<small>Class shown the moment the build confirms</small></span></div>
             <div class="spec-row"><span class="k">Standard</span><span class="v">BEP-721<small>ERC-721 on BNB Smart Chain</small></span></div>
-            <div class="spec-row"><span class="k">Contract</span><span class="v"><span class="addr" id="contractAddr">0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1</span><small><a href="https://bscscan.com/address/0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1" target="_blank" rel="noopener">View on BscScan ↗</a> · <button class="addr-copy" type="button" data-copy="contractAddr">Copy address</button></small></span></div>
+            <div class="spec-row addr-row"><span class="k">Contract</span><span class="v"><span class="addr" id="contractAddr">0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1</span><small><a href="https://bscscan.com/address/0x8d6c4A73d22CEAfEEB840AB073fA3Eeb358a7Ba1" target="_blank" rel="noopener">View on BscScan ↗</a> · <button class="addr-copy" type="button" data-copy="contractAddr">Copy address</button></small></span></div>
           </div>
         </div>
         <div>
